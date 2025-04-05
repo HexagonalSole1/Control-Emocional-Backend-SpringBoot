@@ -1,4 +1,4 @@
-package com.example.APISkeleton.web;
+package com.example.APISkeleton.web.controllers;
 
 import com.example.APISkeleton.services.impls.FirebaseMessagingService;
 import com.example.APISkeleton.web.dtos.requests.FCMNotificationRequest;
