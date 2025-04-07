@@ -18,6 +18,9 @@
         <org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
         <org.projectlombok.version>1.18.32</org.projectlombok.version>
     </properties>
+
+
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>

@@ -17,6 +17,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -62,9 +63,16 @@ public class UserServiceImpl implements IUserService {
 
         // 🔹 Asignar los roles al usuario
         for (String roleName : rolesToAssign) {
+            // Buscar el rol, o crearlo si no existe
             Role role = roleRepository.findByName(roleName)
-                    .orElseThrow(() -> new ResourceNotFoundException(Role.class));
-
+                    .orElseGet(() -> {
+                        // Si el rol no existe, lo creamos
+                        Role newRole = new Role();
+                        newRole.setName(roleName);
+                        newRole.setCreatedAt(LocalDateTime.now());
+                        newRole.setUpdatedAt(LocalDateTime.now());
+                        return roleRepository.save(newRole);
+                    });
 
             UserRole userRole = new UserRole();
             userRole.setUser(user);
